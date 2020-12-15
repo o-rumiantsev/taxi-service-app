@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "1b6d8053-5c6a-49c1-91c6-9bf913b157d8",
+		"name": "Taxi Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/orders",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get driver's orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/orders?driverId={{driverId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "driverId",
+									"value": "{{driverId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e8208fd3-825b-4653-b984-98d3bd2a37b7",
+								"exec": [
+									"const order = pm.response.json();",
+									"if (order.id) {",
+									"    pm.environment.set(\"orderId\", order.id);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customerId\": 1,\n    \"sourceAddress\": \"Source\",\n    \"destinationAddress\": \"Destination\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start ",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderId\": {{orderId}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/order/start",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderId\": {{orderId}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/order/complete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"order",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "eae9e4af-8c09-4120-aacb-3f7dce60b64a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6e49b830-3af2-4cce-9f7e-17242d7708dc",
+								"exec": [
+									"const driver = pm.response.json();",
+									"if (driver.id) {",
+									"    pm.environment.set(\"driverId\", driver.id);",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/driver",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"driver"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Stats",
+			"item": [
+				{
+					"name": "Favourite destination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stats/favourite_destination?driverId={{driverId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stats",
+								"favourite_destination"
+							],
+							"query": [
+								{
+									"key": "driverId",
+									"value": "{{driverId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Orders count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stats/orders_count?driverId={{driverId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stats",
+								"orders_count"
+							],
+							"query": [
+								{
+									"key": "driverId",
+									"value": "{{driverId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Average drive time",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stats/average_drive_time?driverId={{driverId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stats",
+								"average_drive_time"
+							],
+							"query": [
+								{
+									"key": "driverId",
+									"value": "{{driverId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total orders price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/stats/total_orders_price?driverId={{driverId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"stats",
+								"total_orders_price"
+							],
+							"query": [
+								{
+									"key": "driverId",
+									"value": "{{driverId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

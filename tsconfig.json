@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/node14/tsconfig.json",
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "allowJs": true,
+    "strict": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ]
+  },
+  "include": ["src", "migrations"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "@tsconfig/node14": "^1.0.0",
+    "@types/node": "^14.14.13",
+    "fastify": "^3.9.1",
+    "fastify-autoload": "^3.3.1",
+    "knex": "^0.21.13",
+    "objection": "^2.2.3",
+    "pg": "^8.5.1",
+    "typescript": "^4.1.3"
+  },
+  "name": "taxi-service-test-task",
+  "version": "1.0.0",
+  "main": "dist/app.js",
+  "author": "Rumiantsev Oleksii <rumiantsev.oleksii@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -r dist/ && tsc",
+    "lint": "eslint .",
+    "start": "yarn migrate:up && yarn seed && node dist/src/index.js",
+    "seed": "knex seed:run --knexfile src/config/knexfile.ts",
+    "migrate:make": "knex migrate:make --knexfile src/config/knexfile.ts",
+    "migrate:up": "knex migrate:up --knexfile src/config/knexfile.ts",
+    "migrate:down": "knex migrate:down --knexfile src/config/knexfile.ts",
+    "migrate:latest": "knex migrate:latest --knexfile src/config/knexfile.ts",
+    "migrate:rollback": "knex migrate:rollback --knexfile src/config/knexfile.ts"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
+    "@typescript-eslint/parser": "^4.9.1",
+    "eslint": "^7.15.0",
+    "ts-node": "^9.1.1"
+  }
+}
