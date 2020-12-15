@@ -1,4 +1,6 @@
+import config from '../config';
 import Order from '../models/Order';
+import { errors } from '../errors';
 import { OrderStatus } from '../enums/OrderStatus';
 import { getFreeDriver } from './driver';
 import { getCustomer } from './customer';
@@ -29,20 +31,20 @@ export const createNewOrder = async (
   );
 
   if (customerActiveOrders.length) {
-    throw new Error('Customer is already on drive');
+    throw errors.ERR_CUSTOMER_ON_DRIVE;
   }
 
   const driver = await getFreeDriver();
 
   if (!driver) {
-    throw new Error('No free drivers available');
+    throw errors.ERR_NO_FREE_DRIVERS;
   }
 
   const customer = await getCustomer(orderData.customerId);
   return Order.query().insert({
     driverId: driver.id,
     customerId: customer.id,
-    price: random(100, 1000),
+    price: random(config.orderPrice.min, config.orderPrice.max),
     sourceAddress: orderData.sourceAddress,
     destinationAddress: orderData.destinationAddress,
     status: OrderStatus.PENDING,
@@ -55,11 +57,11 @@ export const startOrder = async (
   const order = await Order.query().findOne({ id: orderId });
 
   if (!order) {
-    throw new Error('No such order');
+    throw errors.ERR_NO_SUCH_ORDER;
   }
 
   if (order.status !== OrderStatus.PENDING) {
-    throw new Error('Cannot start order which is not pending');
+    throw errors.ERR_CANNOT_START_ORDER;
   }
 
   return order.$query().updateAndFetch({
@@ -74,11 +76,11 @@ export const completeOrder = async (
   const order = await Order.query().findOne({ id: orderId });
 
   if (!order) {
-    throw new Error('No such order');
+    throw errors.ERR_NO_SUCH_ORDER;
   }
 
   if (order.status !== OrderStatus.ACTIVE) {
-    throw new Error('Cannot start order which is not active');
+    throw errors.ERR_CANNOT_COMPLETE_ORDER;
   }
 
   return order.$query().updateAndFetch({
