@@ -1,5 +1,5 @@
 import {FastifyInstance, FastifyRequest} from 'fastify';
-import * as statsService from '../services/stats';
+import * as statsService from './service';
 
 const favouriteDestination = async (
   request: FastifyRequest<Routes.Stats.ByDriver>,

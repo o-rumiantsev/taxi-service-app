@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import Order from '../models/Order';
+import Order from '../orders/model';
 import { OrderStatus } from '../enums/OrderStatus';
 
 export const favouriteDestination = async (

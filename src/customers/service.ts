@@ -1,4 +1,4 @@
-import Customer from '../models/Customer';
+import Customer from './model';
 
 export const getCustomer = async (customerId: number): Promise<Customer> => {
   const [customer] = await Customer.query().where({ id: customerId });

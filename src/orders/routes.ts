@@ -2,9 +2,9 @@ import {
   FastifyInstance,
   FastifyRequest,
 } from 'fastify';
-import * as orderService from '../services/order';
-import orderSchema from '../schemas/order';
-import Order from '../models/Order';
+import * as orderService from './service';
+import orderSchema from './schema';
+import Order from './model';
 
 const createOrder = async (
   request: FastifyRequest<Routes.Order.Create>,

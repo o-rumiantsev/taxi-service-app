@@ -1,5 +1,5 @@
 import { Model, RelationMappings } from 'objection';
-import Order from './Order';
+import Order from '../orders/model';
 
 export default class Driver extends Model {
   id!: number;

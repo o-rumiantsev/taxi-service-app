@@ -1,6 +1,6 @@
 import { Model, RelationMappings } from 'objection';
-import Driver from './Driver';
-import Customer from './Customer';
+import Driver from '../drivers/model';
+import Customer from '../customers/model';
 
 import { OrderStatus } from '../enums/OrderStatus';
 

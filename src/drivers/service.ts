@@ -1,5 +1,5 @@
-import Driver from '../models/Driver';
-import Order from '../models/Order';
+import Driver from '../drivers/model';
+import Order from '../orders/model';
 import { OrderStatus } from '../enums/OrderStatus';
 
 const isOrderUncompleted = (order: Order): boolean =>

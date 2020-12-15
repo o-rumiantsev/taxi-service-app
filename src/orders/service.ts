@@ -1,9 +1,9 @@
 import config from '../config';
-import Order from '../models/Order';
 import { errors } from '../errors';
 import { OrderStatus } from '../enums/OrderStatus';
-import { getFreeDriver } from './driver';
-import { getCustomer } from './customer';
+import { getCustomer } from '../customers/service';
+import { getFreeDriver } from '../drivers/service';
+import Order from './model';
 
 const random = (min: number, max: number): number =>
   Math.round(Math.random() * (max - min) + min);
