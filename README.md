@@ -33,6 +33,18 @@ Example environment and collection are stored in `postman/` folder.
 ## Deployment
 ___
 
-1. To start application you need to run this command in project directory: `$ docker-compose up -d`
-2. After that, you can import Postman collection and environment to your Postman app and try different endpoints.
+1. Before you start application, you should create .env file based on .env.dist. 
+   Fill variables in the next way:
+   
+ ```shell
+PGHOST=db
+PGUSER=postgres
+PGPASSWORD=postgres
+PGDATABASE=postgres
+PGPORT=5432
+PORT=3000
+HOST=0.0.0.0
+ ```
+2. To start application you need to run this command in project directory: `$ docker-compose up -d`
+3. After that, you can import Postman collection and environment to your Postman app and try different endpoints.
 
